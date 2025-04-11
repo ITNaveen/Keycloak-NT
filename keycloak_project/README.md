@@ -76,7 +76,27 @@ server:
   port: 8081
 
 
-# we will now actually api using access token, obtained from keycloack to verify if previous config is effective or not.
+# we will now actually check api using access token, obtained from keycloack to verify if previous config is effective or not.
+so Keycloak-src-main-java-com-example-keycloack-KEYCLOAKAPPLICATION.JAVA
+now click on run and it will run, it will start your java app and keycloack app started.
+tomcat start at 8081, so we will access api on localhost:8081
 
+- Now we will use postman to access api - 
+first set up a get request content for api to get for free material request.
+so my workspace-new-http-get = first we will access free article retreival method. check under "api dir", 
+so get with this address - http://localhost:8081/api/articles/basic and try without token and it will imeediately fail with 401.
+
+- now we will try with token (last token wouldn work as it has validity of 5 sec), so we need token so - 
+POST - http://localhost:8080/realms/news_realm/protocol/openid-connect/token with basic user detail 
+grant_type = password
+client_id = news_app_client
+username and password = basic_user
+then send request and get token then back to anther tab (where last get was failed) then click on auth - then select bearer token and in this paste token and it works.
+send Get again and you get 200 and "Free article" message.
+
+- now try basic to premium and try accessing and you get 200 ok and premium article 
+
+- now lets check if access control is correctly perform for premium member. we will access free article as a premium member - 
+so on POST get a token for premium, then use this token to make GET to fetch response using basic. you get 200 and free article.
 
 
